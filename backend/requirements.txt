@@ -1,0 +1,6 @@
+fastapi[all]
+httpx
+sqlalchemy
+pydantic
+pyyaml
+python-dotenv
