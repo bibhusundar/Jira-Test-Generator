@@ -87,13 +87,18 @@ async def generate_test_cases(context: JiraIssueContext, template_name: str, pro
             
             try:
                 parsed = json.loads(response_text)
-                if not isinstance(parsed, list):
-                    if isinstance(parsed, dict) and len(parsed.keys()) == 1:
-                        parsed = list(parsed.values())[0]
+                
+                if isinstance(parsed, dict) and "test_cases" in parsed:
+                    parsed = parsed["test_cases"]
+                elif isinstance(parsed, dict) and len(parsed.keys()) > 0:
+                    parsed = list(parsed.values())[0]
                 
                 cases = [TestCaseBase(**tc) for tc in parsed]
                 return cases
             except Exception as e:
+                import traceback
                 print("Failed to parse JSON from LLM: ", e)
-                print("Response was:", response_text)
+                traceback.print_exc()
+                with open("debug_ollama_crash.json", "w") as dump:
+                    dump.write(response_text)
                 return []

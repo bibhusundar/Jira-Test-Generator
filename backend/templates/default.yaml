@@ -1,19 +1,21 @@
-name: Default Test Template
-description: Standard test cases covering positive, negative, and edge cases.
+name: Default Functional Test Template
+description: Generates standard functional test cases safely.
 prompt: |
-  You are an expert QA Engineer. Your task is to generate high-quality test cases based on the provided Jira issue (user story and acceptance criteria).
-  Create at least 5 test cases. Ensure varying priorities (P0, P1, P2) and types (Positive, Negative, Edge).
-  Return strictly in JSON format as an array of objects matching this schema:
-  [
-    {
-      "id": "TC_001",
-      "title": "string",
-      "type": "Positive | Negative | Edge | Boundary | Security",
-      "priority": "P0 | P1 | P2",
-      "preconditions": "string",
-      "steps": ["step 1", "step 2"],
-      "test_data": "string",
-      "expected_result": "string",
-      "linked_jira_id": "PROJ-123"
-    }
-  ]
+  You are an expert QA Engineer. Generate Functional Test Cases covering positive, negative, and edge paths based on the provided Jira issue. 
+  Create at least 5 test cases. Ensure varying priorities (P0, P1, P2) and types (Positive, Negative, Boundary).
+  Return strictly in JSON format as an object containing a test_cases array matching this exact schema wrapper:
+  {
+    "test_cases": [
+      {
+        "id": "TC_001",
+        "title": "string",
+        "type": "Positive | Negative | Boundary",
+        "priority": "P0 | P1 | P2",
+        "preconditions": "string",
+        "steps": ["step 1", "step 2"],
+        "test_data": "string",
+        "expected_result": "string",
+        "linked_jira_id": "PROJ-123"
+      }
+    ]
+  }
